@@ -39,10 +39,6 @@
                                     href="{{ route('dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('donation.index') }}">My
-                                    Donation</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{{ route('profile') }}">Profile</a>
                             </li>
                             <li class="nav-item">

@@ -16,11 +16,6 @@ class DonationController extends Controller
         $this->donationService = new DonationService;
     }
 
-    public function index()
-    {
-        return view('pages.donation.index');
-    }
-
     public function donatePage($username)
     {
         $user = (new UserService)->getAccountByUsernamen($username);
@@ -30,17 +25,17 @@ class DonationController extends Controller
 
     public function payDonation(Request $request)
     {
-        return  $this->donationService->payDonation($request->all());
+        return $this->donationService->payDonation($request->all());
     }
 
     public function payDonationCallback()
     {
-        // write code here
+        return $this->donationService->payDonationCallback();
     }
 
-    public function exportDonationToExcel()
+    public function successDonationPage()
     {
-        // write code here
+        return view('pages.donation.success');
     }
 
 }

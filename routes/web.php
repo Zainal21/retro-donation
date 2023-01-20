@@ -28,6 +28,7 @@ Route::group(['prefix' => 'auth'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
     Route::controller(DashboardController::class)->group(function () {
+        Route::get('/home', 'index')->name('home');
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/profile', 'profile')->name('profile');
         Route::put('/profile/social-media', 'updateSocialMedia')->name('social-media.update');
@@ -38,8 +39,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('logout', [SocialiteController::class, 'logout'])->name('logout');
 
     Route::controller(DonationController::class)->group(function () {
-        Route::get('/donation-list', 'index')->name('donation.index');
+        Route::get('/donate/{name}', 'donatePage')->name('donation.index');
+        Route::post('/pay-donate', 'payDonation')->name('donation.pay');
     });
-    Route::get('/donate/{name}', [DonationController::class, 'donatePage'])->name('donation.donate-action');
-    Route::post('pay-donate', [DonationController::class, 'payDonation'])->name('donation.pay');
 });

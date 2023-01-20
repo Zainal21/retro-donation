@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Donation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 interface DonationContract
 {
@@ -19,11 +20,32 @@ class DonationRepository implements DonationContract
        return Donation::where('user_id', $user_id)->get();
     }
 
+    public function getDonationByOrderCode($order_code)
+    {
+        return Donation::where('donate_code',$order_code)->first();
+    }
+
     public function createDonation($data)
     {
         return Donation::create($data);
     }
 
+    public function countStaticticDashboard()
+    {
+        $user = Auth::user();
+        $statusDonate =  [
+            'user_id_donate' => $user->id,
+            'status' => 'SUCCESS'
+        ];
+        $data['send_donation'] = Donation::where($statusDonate)->count();
+        $data['my_donation'] = Donation::where($statusDonate)->count();
+        $data['donation_unpaid'] = Donation::where([
+            'user_id_donate' => $user->id,
+            'status' => 'PENDING'
+        ])->count();
+        return $data;
+    }
+    
     public function generateTransactionCode()
     {
         $day = date('d');

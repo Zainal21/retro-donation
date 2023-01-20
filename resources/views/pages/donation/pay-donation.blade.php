@@ -90,6 +90,7 @@
                         let route = "{{ route('donation.pay') }}";
                         ajaxRequest(data, route)
                             .then(res => {
+                                clearField()
                                 Swal.fire({
                                     title: "Success",
                                     text: "Payment Method Created Succesfully",
@@ -99,10 +100,11 @@
                                 })
                             })
                             .catch(err => {
+                                clearField()
                                 Swal.fire({
                                     title: 'Failed',
-                                    text: "Failed for Donate",
-                                    icon: 'Failed',
+                                    text: (err.message) || "Failed for Donate",
+                                    icon: 'errors',
                                 })
                             });
                     }
@@ -112,8 +114,8 @@
         })
 
         function clearField() {
-            $('#amount').val('')      
-            $('#message').val('')     
+            $('#amount').val('')
+            $('#message').val('')
         }
     </script>
 @endpush

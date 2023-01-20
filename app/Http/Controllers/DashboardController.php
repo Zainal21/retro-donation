@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Services\DonationService;
 use App\Http\Requests\SocialMediaRequest;
 use App\Http\Requests\AmountSettingRequest;
 use App\Http\Requests\ChangePasswordRequest;
@@ -22,7 +23,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('pages.dashboard.index');
+        $donation = (new DonationService)->getCountStaticticDonation();
+        return view('pages.dashboard.index', compact('donation'));
     }
 
     public function profile()
