@@ -4,6 +4,11 @@
 body {
     padding: 0 2rem;
     margin: 0 2rem;
+    font-family: "Press Start 2P";
+}
+
+.invalid-feedback {
+    display: block !important;
 }
 
 #nescss > .container {
@@ -157,7 +162,7 @@ section.showcase > section.samplecode > pre code {
 /* Containers */
 .item.containers > .nes-container {
     display: inline-block;
-    max-width: 400px;
+    max-width: 800px;
 }
 
 /* Balloons sample */
@@ -220,8 +225,9 @@ h3.topic-title > i {
 }
 .nes-container.member-card {
     display: flex;
-    padding: 1rem 1.5rem;
-    width: 470px;
+    justify-content: center;
+    /* padding: 1rem 1rem; */
+    width: 380px;
     margin-bottom: 2rem;
 }
 

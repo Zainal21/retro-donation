@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('social_media_users', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id');
-            $table->string('instagram')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('youtube')->nullable();
+            $table->string('donate_code');
+            $table->string('user_id');
+            $table->string('user_name');
+            $table->string('user_id_donate');
+            $table->string('user_name_donate');
+            $table->string('gross_amount');
+            $table->text('message')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_media_users');
+        Schema::dropIfExists('donation');
     }
 };

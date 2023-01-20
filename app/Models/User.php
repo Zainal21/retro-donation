@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
         'github_id',
@@ -45,4 +46,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function social_media()
+    {
+        return $this->hasOne(Socialmedia::class, 'user_id', 'id');
+    }
+
+    public function amount_setting()
+    {
+        return $this->hasOne(Amountsetting::class, 'user_id', 'id');
+    }
 }

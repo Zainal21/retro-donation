@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.rtl.min.css"
@@ -16,49 +16,7 @@
 </head>
 
 <body>
-    <x-alert />
     <div id="nescss">
-        <header>
-            <nav class="navbar bg-light">
-                <div class="container">
-                    <div class="nav-brand bg-light">
-                        <a href="https://nostalgic-css.github.io/NES.css/">
-                            <h1><i class="snes-jp-logo brand-logo"></i>Retro-Donation</h1>
-                        </a>
-                        <p>Bridge interaction with your audience!.</p>
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            @auth
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                    href="{{ route('dashboard') }}">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('donation.index') }}">My
-                                    Donation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('profile') }}">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-                            </li>
-                            @endauth
-                            @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                            </li>
-                            @endguest
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
         @yield('content')
         <footer>
             <p><span>©{{ date('Y') }}</span>
@@ -67,7 +25,6 @@
                 <a href="https://twitter.com/bc_rikko" target="_blank" rel="noopener"></a>@Muhamad.tsx
             </p>
         </footer>
-        <button type="button" class="nes-btn is-error scroll-btn active"><span>&lt;</span></button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
@@ -99,7 +56,7 @@
                 Swal.fire({
                     icon: "error",
                     title: 'Failed!',
-                    text: stateError,
+                    text: state,
                 });
             }
 
@@ -107,7 +64,6 @@
                 reverse: true
             });
         })
-
         const ajaxRequest = (data = null, route, method = 'post') => {
             return new Promise((resolve, reject) => {
                 $.ajax({
@@ -115,7 +71,22 @@
                     type: method,
                     dataType: 'json',
                     data: data,
+                    beforeSend: function() {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            title: 'Please Wait',
+                            text: 'Transaction being process.',
+                            imageHeight: 150,
+                            imageWidth: 150,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        })
+                    },
                     success: function(response) {
+                        Swal.close()
                         if (response.success) {
                             resolve(response)
                         } else {
@@ -123,6 +94,7 @@
                         }
                     },
                     error: function(err) {
+                        Swal.close()
                         reject(err)
                     }
                 });
