@@ -1,66 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Retro Donation with Retro Style
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://laravel.com/">
+    <img title="https://laravel.com/" src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400">
+  </a>
 </p>
 
-## About Laravel
+> (Open Source Project) Simple application for creating donation integrated with midrans payment gateway
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   [Table of contents](#table-of-contents)
+-   [Prerequiste](#prerequiste)
+-   [Stacks](#stacks)
+-   [Installation and Cofiguration](#installation)
+-   [Screen Capture](#capture)
 
-## Learning Laravel
+## Prerequiste
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   [Composer](https://getcomposer.org/) - Download and Install Composer
+-   Docker
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Stacks
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   PHP 8
+-   Laravel 9
+-   Bootstrap 5
+-   Nes.css
+-   Select2
+-   Ubuntu (Base Image)
+-   Nginx (Running in Container)
+-   Sail (Laravel Library Docker development environment)
+-   PostgreSQL running inside Container
 
-## Laravel Sponsors
+## Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Clone repository
 
-### Premium Partners
+```bash
+$ git clone https://github.com/Zainal21/retro-donation.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+2. move to directory project and Install depedencies
 
-## Contributing
+```bash
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+$ cd retro-donation
 
-## Code of Conduct
+$ Composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Setup your environment variabl in `.env` files or rename `.env.example to .env`.
 
-## Security Vulnerabilities
+4. pull image & run image then Generate your application key
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+$  ./vendor/bin/sail up -d
+```
 
-## License
+```bash
+$ ./vendor/bin/sai artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Run Migration and Seeder (if you not import .sql file manually)
+
+```bash
+$ ./vendor/bin/sai artisan migrate --seed
+```
+
+## Screen Capture Result
+
+-   Dashboard
+    ![Register](public/screen_capture/image2.png)
+-   Donation Page
+    ![Donation Page](public/screen_capture/image3.png)
+-   Confirm Donation
+    ![confirm](public/screen_capture/image4.png)
+-   Payment/Send Donation
+    ![confirm](public/screen_capture/image6.png)
+
+---
+
+Copyright © 2022 by Muhamad Zainal Arifin
+
+> The Project is Under MIT licensed.
