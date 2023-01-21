@@ -83,6 +83,6 @@ $ ./vendor/bin/sai artisan migrate --seed
 
 ---
 
-Copyright © 2022 by Muhamad Zainal Arifin
+Copyright © 2023 by Muhamad Zainal Arifin
 
 > The Project is Under MIT licensed.
